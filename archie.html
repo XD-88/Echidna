@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: #F5E7B2;
+      margin: 0;
+    }
+    .header {
+      background-color: #973131;
+      padding: 10px;
+      text-align: center;
+    }
+    .header p {
+      display: inline-block;
+    }
+    .text {
+      color: #F5E7B2;
+      font-weight: bold;
+    }
+    .text2 {
+      color: #973131;
+      font-weight: bold;
+      text-align: center;
+      font-size: 28px;
+    }
+    .content {
+      font-size: 24px;
+      margin: 20px;
+    }
+    .image {
+      height: 400px;
+      border: 2px solid black;
+      margin: 20px;
+    }
+  </style>
+  
+  <section class="header">
+    <p style="display:inline-block;">
+      <img src="Echidna.png" width="120" height="90">
+      <span style="font-size: 80px;" class="text"> Archie's Abode </span>
+    </p>
+  </section>
+
+  <section>
+    <div style="display: flex; align-items: center; padding: 10px 50px;">
+      <div>
+        <p class="text2">Lucky You!</p>
+        <p class="content"> Congratulations! You decided that you were feeling lucky today, and you were absolutely right! Welcome to Archie's Abode, where you can read more about our beloved mascot.</p>
+      </div>
+      <img src="archie/stararchie.png" width="240" height="240">
+    </div>
+    <div style="display: flex; align-items: center; padding: 10px 50px;">
+      <img src="archie/mascotarchie.png" width="240" height="180">
+      <div>
+        <p class="text2">Introduction</p>
+        <p class="content">Hi I'm Archie, the mascot of Echidna Physiotherapy, and I was created to accompany you on this website. With my encouragement, moral support and unlimited supply of cuteness, I'm always beside you in your physiotherapy journey!</p>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; padding: 10px 50px;">
+      <div>
+        <p class="text2">Why Echidna?</p>
+        <p class="content">When choosing a mascot, my benevolent creators decided on an echidna because we are also known as spiny anteaters. As per my name, I am here to correct your spine through physiotherapy, allowing you to live a more comfortable, healthy and active life.</p>
+      </div>
+      <img src="archie/standarchie.png" width="240" height="180">
+    </div>
+    <div style="display: flex; align-items: center; padding: 10px 50px;">
+      <img src="archie/bigarchie.png" width="240" height="180">
+      <div>
+        <p class="text2">Inspiration</p>
+        <p class="content">Another fun fact about my conceptualisation is that I was inspired by my good friend, Duo from Duolingo! I aspire to be like Duo and constantly remind you about your exercises. After all, they work best if you do them on a daily basis! So... HAVE YOU DONE YOUR EXERCISES YET?</p>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; padding: 10px 50px;">
+      <div>
+        <p class="text2">My Name</p>
+        <p class="content">My full name is Archie Lewis Yankovic III!</p>
+        <p class="content">My first name, Archie, is a reminder for you to arch your back for a better posture. Another plus is that it's a super cute name!</p>
+        <p class="content">My middle name, Lewis, was chosen as a tribute to a noble hamster who was loved by all: Lewis Hamsterton. He belonged to one of my creators, but sadly passed away recently. Let us all have a moment of silence for him.</p>
+        <p class="content">My initials, Al Yankovic, are the same as an American musician and comedian, who was rather weird (just like my creators). AL also looks like AI, which is what we use to track your exercises!</p>
+        <p class="content">Finally, "III" refers to the 3 person team of creators behind this website, as well as the fact that there were 3 drafts of me!</p>
+      </div>
+      <div>
+        <img src="archie/dancearchie.png" width="240" height="180">
+        <img src="archie/sadarchie.png" width="240" height="180">
+        <img src="archie/situparchie.png" width="240" height="180">
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; padding: 10px 50px;">
+      <div>
+        <p class="text2">Archie's Words of Wisdom</p>
+        <p class="content">You may have noticed that I provide encouragement, tips and fun facts on the homepage. As a reward for your curiosity, determination and luck that led you to this page, here's the complete compilation of Archie's Words of Wisdom!</p>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; padding: 10px 50px;">
+      <div>
+        <img src="archie/awow/awow1.png" width="200" height="150">
+        <img src="archie/awow/awow2.png" width="200" height="150">
+        <img src="archie/awow/awow3.png" width="200" height="150">
+        <img src="archie/awow/awow4.png" width="200" height="150">
+        <img src="archie/awow/awow5.png" width="200" height="150">
+        <img src="archie/awow/awow6.png" width="200" height="150">
+        <img src="archie/awow/awow7.png" width="200" height="150">
+        <img src="archie/awow/awow8.png" width="200" height="150">
+        <img src="archie/awow/awow9.png" width="200" height="150">
+        <img src="archie/awow/awow10.png" width="200" height="150">
+        <img src="archie/awow/awow11.png" width="200" height="150">
+        <img src="archie/awow/awow12.png" width="200" height="150">
+      </div>
+    </div>
+  </section>
+
+  <section style="text-align: center;">
+    <style>
+      a {
+        display: inline-block;
+        height: 50px;
+        width: 150px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        line-height: 50px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        text-align: center;
+        font-size: 24px;
+      }
+      a:hover {
+        background: #bc5353;
+      }
+    </style>
+    <a href="index.html"> Home </a>
+  </section>
+</body>
+
+</html>
