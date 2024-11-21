@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: #F5E7B2;
+      margin: 0;
+    }
+    .header {
+      background-color: #973131;
+      padding: 10px;
+      text-align: center;
+    }
+    .header p {
+      display: inline-block;
+    }
+    .text {
+      color: #F5E7B2;
+      font-weight: bold;
+    }
+    .text2 {
+      color: #973131;
+      font-weight: bold;
+      text-align: center;
+    }
+    .content {
+      color: #F5E7B2;
+      font-size: 20px;
+      margin: 20px;
+      display: block;
+      text-align: center;
+    }
+    .buttons {
+      text-align: center;
+      padding: 10px;
+    }
+    .content2 {
+      font-size: 24px;
+      margin: 20px;
+    }
+  </style>
+  
+  <section class="header">
+    <p style="display:inline-block;">
+      <img src="Echidna.png" width="140" height="105">
+      <span style="font-size: 80px;" class="text"> Echidna Physiotherapy </span>
+    </p>
+    <br>
+    <span style="font-size: 20px;" class="text">RGSS02: Jessyn, Xindi & Amelia</span>
+  </section>
+
+  <section class="buttons">
+    <p style="font-size: 28px;" class="text2">Welcome to Echidna Physiotherapy!</p>
+
+    <style>
+      a {
+        display: inline-block;
+        height: 200px;
+        width: 300px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        line-height: 200px;
+        text-align: center;
+        font-size: 28px;
+      }
+      a:hover {
+        background: #bc5353;
+      }
+    </style>
+
+    <a href="about.html"> About Echidna </a>
+    <a href="homepage.html"> Exercises </a>
+    <a href="dance.html"> Dance Break! </a>
+    <a href="takebreak.html"> Take a Break </a>
+    
+  </section>
+
+  <section class="lucky">
+    <a class="b" href="#" id="luckyButton">I'm Feeling Lucky!</a>
+    <style>
+      .b {
+        display: inline-block;
+        height: 50px;
+        width: 300px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        line-height: 50px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        text-align: center;
+        font-size: 24px;
+      }
+      .b:hover {
+        background: #bc5353;
+      }
+      .lucky{
+        text-align: center;
+        padding: 10px;
+      }
+    </style>
+  </section>
+
+  <script>
+    const pages = [
+      'upperbody.html',
+      'lowerbody.html',
+      'kyphosis.html',
+      'osteoarthritis.html',
+      'osteoporosis.html',
+      'sarcopenia.html',
+      'dance1.html',
+      'dance2.html',
+      'dance3.html',
+      'dance4.html',
+      'dance5.html',
+      'dance6.html',
+      'archie.html'
+    ];
+
+    document.getElementById('luckyButton').addEventListener('click', function(event) {
+      event.preventDefault();
+      const randomIndex = Math.floor(Math.random() * pages.length);
+      const randomPage = pages[randomIndex];
+      window.location.href = randomPage;
+    });
+  </script>
+
+  <div class="wisdomprogress">
+    <section class="progress-section">
+      <div class="heading-container">
+        <p class="text3">My Progress:</p>
+      </div>
+      <div class="columns-container">
+        <div class="progress-column">
+          <p class="content2"><b>Exercise Streak:</b> <span id="exercise-streak">0</span></p>
+          <p class="content2"><b>Exercises Today:</b> <span id="exercise-count">0</span></p>
+          <p class="content2"><b>Total Exercises:</b> <span id="total-exercises">0</span></p>
+        </div>
+        <div class="dance-column">
+          <p class="content2"><b>Dance Streak:</b> <span id="dance-streak">0</span></p>
+          <p class="content2"><b>Dances Today:</b> <span id="dances-today">0</span></p>
+          <p class="content2"><b>Total Dances:</b> <span id="total-dances">0</span></p>
+        </div>
+      </div>
+      <button id="reset-exercise-button">Reset Exercise Data</button>
+      <button id="reset-dance-button">Reset Dance Data</button>
+      <script src="exercisestreak.js"></script>
+      <script src="dancestreak.js"></script>
+      <script src="exercisehome.js"></script>
+      <script src="dancehome.js"></script>
+      <style>
+        .progress-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+  
+        .heading-container {
+          text-align: center; /* Center-aligns the heading */
+        }
+  
+        .columns-container {
+          display: flex;
+          gap: 20px; /* Space between the two columns */
+        }
+        .wisdomprogress {
+          display: flex;
+          align-items: flex-start; /* Align the sections to the top */
+          justify-content: center;
+          gap: 50px;
+        }
+      </style>
+    </section>
+    <section class="wisdom">
+      <style>
+        .wisdom {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .text3 {
+          color: #973131;
+          font-weight: bold;
+          text-align: center;
+          font-size: 28px
+        }
+        #random-word {
+          font-size: 20px;
+          padding-left: 20px;
+        }
+        #container {
+          display: flex;
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+        }
+        #text-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-left: 20px;
+        }
+      </style>
+      <div id="container">
+        <p class="text3">Archie's Words of Wisdom:</p>
+        <div id="text-container">
+          <img id="random-image" src="" width="600" height="450" alt="Random Image">
+        </div>
+      </div>
+    </section>
+    
+    <script>
+      const images = [
+        'archie/awow/awow1.png',
+        'archie/awow/awow2.png',
+        'archie/awow/awow3.png',
+        'archie/awow/awow4.png',
+        'archie/awow/awow5.png',
+        'archie/awow/awow6.png',
+        'archie/awow/awow7.png',
+        'archie/awow/awow8.png',
+        'archie/awow/awow9.png',
+        'archie/awow/awow10.png',
+        'archie/awow/awow11.png',
+        'archie/awow/awow12.png'
+      ];
+      
+      function generateRandomImage() {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        const randomImage = images[randomIndex];
+        document.getElementById('random-image').src = randomImage;
+      }
+      
+      generateRandomImage();
+    </script>
+  </div>
+
+  <script>
+    const stopcount = parseInt(localStorage.getItem("stopcount")) || 0;
+
+    function getTodayDateString() {
+      const today = new Date();
+      return today.toISOString().split('T')[0];
+    }
+
+    const storedDate = localStorage.getItem("date");
+    const todayDate = getTodayDateString();
+
+    // Check if the date stored is different from today’s date
+    if (storedDate !== todayDate) {
+        stopcount = 0; // Reset stopcount to 0
+        localStorage.setItem("date", todayDate); // Update stored date
+    }
+
+    console.log("Current stopcount:", stopcount);
+  </script>
+
+  <script>
+    // Check if the user has visited before
+    if (!localStorage.getItem('hasVisited')) {
+        // Set a flag to remember the user has visited
+        localStorage.setItem('hasVisited', 'true');
+        
+        // Redirect to the instructions page
+        window.location.href = 'quiz.html';
+    }
+  </script>
+
+</body>
+
+</html>
