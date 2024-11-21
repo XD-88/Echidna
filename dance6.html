@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: #F5E7B2;
+      margin: 0;
+    }
+    .header {
+      background-color: #973131;
+      padding: 10px;
+      text-align: center;
+    }
+    .header p {
+      display: inline-block;
+    }
+    .text {
+      color: #F5E7B2;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 30px;
+      margin: 40px;
+      display: block;
+      text-align: left;
+    }
+  </style>
+  
+  <section class="header">
+    <p style="display:inline-block;">
+      <img src="Echidna.png" width="120" height="90">
+      <span style="font-size: 80px;" class="text"> Pedro Pedro </span>
+    </p>
+  </section>
+
+  <section class="content">
+    <p><b>Difficulty:</b> ★★★</p>
+    <p><b>Length:</b> ★☆☆</p>
+  </section>
+
+  <section class="video">
+    <div id="video-container"></div>
+    <video id="danceVideo" controls>
+      <source src="dance/pedropedro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section>
+    <style>
+      .popup-image {
+        position: fixed; /* Use fixed positioning */
+        bottom: -100px; /* Start from below the screen */
+        right: -100px; /* Start from the right of the screen */
+        max-width: 500px;
+        max-height: 500px;
+        transition: all 0.5s ease-in-out; /* Smooth transition */
+        z-index: 1001; /* Ensure it's above other content */
+        transform: rotate(350deg);
+      }
+      .slide-in {
+        bottom: -40px; /* Position 10% from the bottom */
+        right: -40px; /* Position 10% from the right */
+      }
+    </style>
+    <div id="image-container"></div>
+    <audio id="sound-effect" src="victory.mp3"></audio>
+
+  </section>
+
+  <script src="dancestreak.js"></script>
+
+  <script>
+    let video;
+
+    function setup() {
+      // Create a canvas and attach it to the video container
+      let canvas = createCanvas(640, 480);
+      canvas.parent('video-container');
+
+      // Initialize the webcam video capture
+      video = createCapture(VIDEO, () => {
+        console.log('Webcam video loaded successfully');
+      });
+      video.size(640, 480);
+      video.hide(); // Hide the raw video stream element
+    }
+
+    function draw() {
+      background(0); // Clear the canvas
+      image(video, 0, 0, width, height); // Draw the video on the canvas
+    }
+
+    // Select the video element
+    const danceVideo = document.getElementById('danceVideo');
+
+    // Add an event listener for when the video ends
+    danceVideo.addEventListener('ended', videoEnded, false);
+
+    // Define the callback function
+    function videoEnded() {
+      logDance();
+      var soundEffect = document.getElementById('sound-effect');
+      soundEffect.play();
+      // Create a new image element
+      var image = new Image();
+      image.src = 'archie/stararchie.png'; // Correct path to the image
+      image.className = 'popup-image'; // Add class for styling
+
+      // Add the image to the container
+      document.getElementById('image-container').appendChild(image);
+
+      // Trigger the slide-in effect after a short delay to ensure the image is added to the DOM
+      setTimeout(function() {
+        image.classList.add('slide-in');
+      }, 100);
+      //setTimeout(function() {
+      //  window.location.href = "dance.html";
+      //}, 5000);
+    }
+  </script>
+
+  <section style="text-align: center;">
+    <style>
+      .video {
+        display: block;
+        text-align: center;
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        gap: 50px; /* Space between items */
+      }
+      video {
+        height: 480px;
+      }
+      a {
+        display: inline-block;
+        height: 50px;
+        width: 150px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        line-height: 50px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        text-align: center;
+        font-size: 24px;
+      }
+      a:hover {
+        background: #bc5353;
+      }
+    </style>
+    <a href="dance.html"> Next </a>
+  </section>
+
+  <script>
+    // Get the current value of stopcount from localStorage or initialize it to 0
+    let stopcount = parseInt(localStorage.getItem("stopcount")) || 0;
+
+    // Increment stopcount by 4
+    stopcount += 3;
+
+    // Save the updated stopcount back to localStorage
+    localStorage.setItem("stopcount", stopcount);
+
+    // Log the current value of stopcount
+    console.log(stopcount);
+
+    // Check if stopcount has reached or exceeded 10
+    if (stopcount >= 10) {
+        window.location.href = "stop.html"; // Redirect to stop.html
+    }
+  </script>
+
+</body>
+
+</html>
