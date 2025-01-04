@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: #F5E7B2;
+      margin: 0;
+    }
+    .header {
+      background-color: #973131;
+      padding: 10px;
+      text-align: center;
+    }
+    .header p {
+      display: inline-block;
+    }
+    .text {
+      color: #F5E7B2;
+      font-weight: bold;
+    }
+    .text2 {
+      color: #973131;
+      font-weight: bold;
+      text-align: center;
+    }
+    .buttons {
+      text-align: center;
+    }
+    .content1 {
+      font-size: 24px;
+      margin: 20px;
+    }
+    .content {
+      font-size: 24px;
+      margin: 20px;
+      padding-top: 20px;
+    }
+    .image {
+      height: 400px;
+      border: 2px solid black;
+      margin: 20px;
+    }
+  </style>
+  
+  <section class="header">
+    <p style="display:inline-block;">
+      <img src="Echidna.png" width="120" height="90">
+      <span style="font-size: 80px;" class="text"> Instructions </span>
+    </p>
+  </section>
+
+  <section class="buttons">
+    <p style="font-size: 28px;" class="text2">How to Use the Website</p>
+  </section>
+
+  <section>
+    <p class="content1">1. Welcome to Echidna Physiotherapy! This is the homepage that you will arrive at when you enter the website. Return to the homepage to select different pages to visit, check on your progress and interact with our adorable mascot Archie the Echidna!</p>
+    <img src="photo/instruction1.png" class="image">
+    <p class="content">2. After clicking into "Exercises" on the homepage, you will arrive at this page. Choose your desired category based on your physiotherapist's diagnosis or your personal preference.</p>
+    <img src="photo/instruction2.png" class="image">
+    <p class="content">3. Upon choosing the category, you will enter the exercise set and see the introduction page which contains some basic information about the set.</p>
+    <img src="photo/instruction3.png" class="image">
+    <p class="content">4. After clicking "Start!", you will be taken to the exercise page. For each exercise, make sure to align yourself on the screen as closely as possible to the video demonstration.</p>
+    <img src="photo/instruction4.png" class="image">
+    <p class="content">5. Once you have completed the exercise, your score will show up on the screen and Archie will prompt you to move on! To do so, either click the buttons or use voice commands by saying "Next" or "Back".</p>
+    <img src="photo/instruction5.png" class="image">
+    <p class="content">6. The last page in the exercise set will summarise the exercises and prompt you to repeat the set a certain number of times.</p>
+    <img src="photo/instruction6.png" class="image">
+    <p class="content">7. For a more exciting way to get your body moving, click on "Dance Break!", choose a song, and follow along!</p>
+    <img src="photo/instruction7.png" class="image">
+    <p class="content">8. Remember to take frequent breaks as well! You may access this page via the homepage or when Archie prompts you to stop and rest. Clear your mind by listening to relaxing music and meditating for 5 minutes.</p>
+    <img src="photo/instruction8.png" class="image">
+    <p class="content">9. For safety reasons, we strongly encourage you to retake the diagnostic quiz once per year. Access this page by clicking "About Us" on the homepage.</p>
+    <img src="photo/instruction9.png" class="image">
+    <p class="content">10. Most importantly, we hope you have fun moving your body and exploring the interface! So what are you waiting for? Get started with Echidna Physiotherapy today!</p>
+  </section>
+
+  <section style="text-align: center;">
+    <style>
+      a {
+        display: inline-block;
+        height: 50px;
+        width: 150px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        line-height: 50px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        text-align: center;
+        font-size: 24px;
+      }
+      a:hover {
+        background: #bc5353;
+      }
+    </style>
+    <a href="about.html"> Back </a>
+    <a href="index.html"> Home </a>
+  </section>
+</body>
+
+</html>
