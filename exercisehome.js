@@ -22,6 +22,13 @@ function initializeEventListeners() {
 
 // Initialize event listeners and update display on page load
 document.addEventListener('DOMContentLoaded', () => {
+    const resetButton = document.getElementById('reset-exercise-button');
+    if (resetButton) {
+        console.log('Reset button found and event listener attached.');
+        resetButton.addEventListener('click', resetExerciseData);
+    } else {
+        console.error('Reset button not found!');
+    }
     initializeEventListeners();
     updateDisplay2(); // Ensure stats are updated on load
     updateDisplay3(); // Ensure display is updated on load
