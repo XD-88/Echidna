@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: #F5E7B2;
+      margin: 0;
+    }
+    .header {
+      background-color: #973131;
+      padding: 10px;
+      text-align: center;
+    }
+    .header p {
+      display: inline-block;
+    }
+    .text {
+      color: #F5E7B2;
+      font-weight: bold;
+    }
+    .text2 {
+      color: #973131;
+      font-weight: bold;
+      text-align: center;
+    }
+    .content {
+      color: #F5E7B2;
+      font-size: 20px;
+      margin: 20px;
+      display: block;
+      text-align: center;
+    }
+    .buttons {
+      text-align: center;
+      padding: 10px;
+    }
+    .gohome {
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+  
+  <section class="header">
+    <p style="display:inline-block;">
+      <img src="Echidna.png" width="120" height="90">
+      <span style="font-size: 80px;" class="text"> Exercises </span>
+    </p>
+  </section>
+
+  <section class="buttons">
+    <p style="font-size: 28px;" class="text2">What would you like to do today?</p>
+
+    <style>
+      a {
+        display: inline-block;
+        height: 200px;
+        width: 300px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        line-height: 200px;
+        text-align: center;
+        font-size: 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      a:hover {
+        background: #bc5353;
+      }
+      .button-image {
+        position: absolute;
+        top: 50%;
+        left: 55px; /* Adjusted right positioning */
+        transform: translateY(-50%);
+        width: 200px;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+        opacity: 0.25;
+      }
+      a span {
+        position: relative;
+        z-index: 1; /* Positioned in front of the image */
+        line-height: normal; /* Normal line-height for proper text rendering */
+      }
+    </style>
+   
+    <a href="upperbody.html">
+      <span>Upper Body (General)</span>
+      <div class="button-image" style="background-image: url('photo/upperbody_icon.png');"></div>
+    </a>
+    <a href="lowerbody.html">
+      <span>Lower Body (General)</span>
+      <div class="button-image" style="background-image: url('photo/lowerbody_icon.png');"></div>
+    </a>
+    <a href="kyphosis.html">
+      <span>Posture (Kyphosis)</span>
+      <div class="button-image" style="background-image: url('photo/kyphosis_icon.png');"></div>
+    </a>
+    <a href="osteoarthritis.html">
+      <span>Osteoarthritis</span>
+      <div class="button-image" style="background-image: url('photo/osteoarthritis_icon.png');"></div>
+    </a>
+    <a href="osteoporosis.html">
+      <span>Osteoporosis</span>
+      <div class="button-image" style="background-image: url('photo/osteoporosis_icon.png');"></div>
+    </a>
+    <a href="sarcopenia.html">
+      <span>Sarcopenia</span>
+      <div class="button-image" style="background-image: url('photo/sarcopenia_icon.png');"></div>
+    </a>
+    
+  </section>
+
+  <section class="gohome">
+    <style>
+      .b {
+        display: inline-block;
+        height: 50px;
+        width: 150px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        line-height: 50px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        text-align: center;
+        font-size: 24px;
+      }
+      .b:hover {
+        background: #bc5353;
+      }
+    </style>
+    <a class="b" href="index.html"> Home </a>
+  </section>
+
+</body>
+
+</html>

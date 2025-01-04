@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: #F5E7B2;
+      margin: 0;
+    }
+    .header {
+      background-color: #973131;
+      padding: 10px;
+      text-align: center;
+    }
+    .header p {
+      display: inline-block;
+    }
+    .text {
+      color: #F5E7B2;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 30px;
+      margin: 20px;
+      display: block;
+      text-align: left;
+    }
+  </style>
+  
+  <section class="header">
+    <p style="display:inline-block;">
+      <img src="Echidna.png" width="120" height="90">
+      <span style="font-size: 80px;" class="text"> Arm Raises </span>
+    </p>
+  </section>
+
+  <section>
+    <style>
+      .container {
+        display: flex;
+        width: 100%;
+      }
+      .done {
+        flex: 1;
+        height: 25px;
+        background-color: #bc5353;
+        border: 2px solid #F5E7B2;
+      }
+      .undone {
+        flex: 1;
+        height: 25px;
+        background-color: #E0A75E;
+        border: 2px solid #F5E7B2;
+      }
+    </style>
+    <section class="container">
+      <div class="done"></div>
+      <div class="done"></div>
+      <div class="done"></div>
+      <div class="undone"></div>
+    </section>
+  </section>
+
+  <section class="content">
+    <p><b>Instructions:</b> Raise your arms and put it down</p>
+    <p><b>Repetitions:</b> 10</p>
+    <p><b>Note:</b> Raise your arms all the way up!</p>
+  </section>
+
+  <script src="exercisestreak.js"></script>
+  <script src="exercise/armraise.js"></script>
+
+  <section class = "video">
+    <div id="video-container"></div>
+    <video autoplay muted loop>
+      <source src="video/armraise.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <section style="text-align: center;">
+    <style>
+      .video {
+        display: block;
+        text-align: center;
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        gap: 50px; /* Space between items */
+      }
+      video {
+        transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        height: 480px;
+      }
+      a {
+        display: inline-block;
+        height: 50px;
+        width: 150px;
+        background: #E0A75E;
+        transition: all 0.5s;
+        line-height: 50px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        border-radius: 20px;
+        margin: 10px;
+        text-align: center;
+        font-size: 24px;
+      }
+      a:hover {
+        background: #bc5353;
+      }
+    </style>
+    <a href="31.html"> Back </a>
+    <a href="3end.html"> Next </a>
+  </section>
+
+  <section>
+    <style>
+      .popup-image {
+        position: fixed; /* Use fixed positioning */
+        bottom: -100px; /* Start from below the screen */
+        right: -100px; /* Start from the right of the screen */
+        max-width: 500px;
+        max-height: 500px;
+        transition: all 0.5s ease-in-out; /* Smooth transition */
+        z-index: 1001; /* Ensure it's above other content */
+        transform: rotate(350deg);
+      }
+      .slide-in {
+        bottom: -40px; /* Position 10% from the bottom */
+        right: -40px; /* Position 10% from the right */
+      }
+    </style>
+    <div id="image-container"></div>
+    <audio id="sound-effect" src="victory.mp3"></audio>
+
+  </section>
+
+  <section>
+    <style>
+      .rectangle1 {
+        position: absolute;
+        top: 450px;
+        left: 275px;
+        width: 200px;
+        height: 100px;
+        background-color: rgba(0, 128, 0, 0); /* green color with 50% transparency */
+        border: 2px solid green; /* optional border */
+      }
+      .rectangle2 {
+        position: absolute;
+        top: 700px;
+        left: 275px;
+        width: 200px;
+        height: 100px;
+        background-color: rgba(0, 128, 0, 0); /* green color with 50% transparency */
+        border: 2px solid green; /* optional border */
+      }
+    </style>
+    <div class="rectangle1"></div>
+    <div class="rectangle2"></div>
+  </section>
+
+  <section>
+    <style>
+      #score-display {
+        position: fixed; /* Make it fixed to stay in one place on the screen */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center it on the screen */
+        font-size: 5em; /* Make the score big */
+        font-weight: bold;
+        color: #F5E7B2;
+        background: #973131; /* Semi-transparent background */
+        padding: 20px 40px;
+        border-radius: 10px;
+        z-index: 9999; /* Ensure it appears in front of everything */
+        box-shadow: 0 4px 10px black; /* Add a shadow for emphasis */
+        text-align: center;
+      }
+      @keyframes pop-up {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+      #score-display {
+        animation: pop-up 0.5s ease-out; /* Apply animation */
+      }
+    </style>
+    <div id="score-display" style="display: none;">
+      Score: <span id="score-value"></span>
+    </div>
+  </section>
+
+  <script>
+    function next() {
+      window.location.href = '3end.html';
+    }
+
+    function back() {
+      window.location.href = '31.html';
+    }
+
+    // Initialize Speech Recognition API
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition(); // Initialize my instance of speech recognition
+    recognition.interimResults = true; // Return results while still working on current recognition
+
+    // Log when the speech recognition service starts
+    recognition.addEventListener('start', () => {
+      console.log('Speech recognition service has started');
+    });
+
+    // Log any errors
+    recognition.addEventListener('error', e => {
+      console.error('Speech recognition error:', e.error);
+    });
+
+    // Log when the speech recognition service ends
+    recognition.addEventListener('end', () => {
+      console.log('Speech recognition service has ended');
+      // Restart the service when it ends
+      recognition.start();
+    });
+
+    // Once speech recognition determines it has a "result", log the result and check for "next"
+    recognition.addEventListener("result", e => {
+      console.log('Speech recognition result event:', e);
+
+      const transcript = Array.from(e.results)
+        .map(result => result[0].transcript)
+        .join('');
+
+      console.log('Transcript:', transcript);
+
+      if (transcript.trim().toLowerCase() === "next") {
+        console.log('Recognized command "next"');
+        next(); // Assuming this function is defined elsewhere
+      }
+
+      if (transcript.trim().toLowerCase() === "back") {
+        console.log('Recognized command "back"');
+        back(); // Assuming this function is defined elsewhere
+      }
+    });
+
+    // Start the speech recognition service
+    recognition.start();
+  </script>
+</body>
+
+</html>

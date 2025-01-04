@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+    <style>
+        body {
+          background-color: #F5E7B2;
+          margin: 0;
+        }
+        .header {
+          background-color: #973131;
+          padding: 10px;
+          text-align: center;
+        }
+        .header p {
+          display: inline-block;
+        }
+        .text {
+          color: #F5E7B2;
+          font-weight: bold;
+        }
+        .text2 {
+          color: #973131;
+          font-weight: bold;
+          text-align: center;
+        }
+        .content {
+          color: #F5E7B2;
+          font-size: 20px;
+          margin: 20px;
+          display: block;
+          text-align: center;
+        }
+        .content2 {
+          font-size: 35px;
+          margin: 20px;
+        }
+        .archie {
+          text-align: center;
+          padding: 10px;
+        }
+        .gohome {
+          text-align: center;
+          padding: 10px;
+        }
+        .question {
+            font-size: 35px;
+            margin: 30px;
+            margin-bottom: 80px;
+        }
+        .question-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Adjusts space between question and input */
+            margin-bottom: 0;
+        }
+        .b {
+            display: inline-block;
+            height: 50px;
+            width: 200px;
+            background: #E0A75E;
+            transition: all 0.5s;
+            line-height: 50px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            border-radius: 20px;
+            margin: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .b:hover {
+            background: #bc5353;
+        }
+        .clicked {
+            background-color: #bc5353; /* New color after click */
+        }
+      </style>
+      
+    <section class="header">
+        <p style="display:inline-block;">
+          <img src="Echidna.png" width="120" height="90">
+          <span style="font-size: 80px;" class="text">Diagnostic Quiz</span>
+        </p>
+    </section>
+
+    <section class="archie">
+        <p style="font-size: 28px;" class="text2">Welcome to Echidna Physiotherapy!</p>
+        <p class="content2">Before you begin your physiotherapy programme/exercise set, it is important to ensure that these exercises are safe and suitable for your needs. To better understand your needs, please complete this diagnostic!</p>  
+    </section>
+
+    <div id="quiz-container">
+        <div class="question" id="question1">
+            <p>Q1. Have you received an official diagnosis for any pain or MSDs you have from a doctor? (Select more than 1 if necessary)</p>
+            <label><input type="checkbox" name="q1" value="Kyphosis" class="other-option1">Kyphosis</label><br>
+            <label><input type="checkbox" name="q1" value="Osteoarthritis" class="other-option1">Osteoarthritis</label><br>
+            <label><input type="checkbox" name="q1" value="Osteoporosis" class="other-option1">Osteoporosis</label><br>
+            <label><input type="checkbox" name="q1" value="Sarcopenia" class="other-option1">Sarcopenia</label><br>
+            <label><input type="checkbox" name="q1" value="Other MSDs" class="other-option1">Other MSDs (not listed here)</label><br>
+            <label><input type="checkbox" name="q1" value="No MSDs" onclick="toggleOtherOptions1(this)">No Diagnosis of MSDs</label><br>
+            <script>
+                function toggleOtherOptions1(noMSDsCheckbox) {
+                    // Get all checkboxes with the class 'other-option'
+                    const otherOptions = document.querySelectorAll('.other-option1');
+            
+                    if (noMSDsCheckbox.checked) {
+                        // Disable other options if 'No MSDs' is checked
+                        otherOptions.forEach(option => {
+                            option.checked = false; // Uncheck any already selected options
+                            option.disabled = true;
+                        });
+                    } else {
+                        // Enable other options if 'No MSDs' is unchecked
+                        otherOptions.forEach(option => option.disabled = false);
+                    }
+                }
+            </script>
+        </div>
+
+        <div class="question" id="question2">
+            <p>Q2. What is your current age?</p>
+            <input type="number" id="age" name="age" min="0" max="120" style="width: 200px;" placeholder="Enter your age">
+        </div>
+
+        <div class="question" id="question3">
+            <p>Q3. Please enter your height and weight for BMI calculation.</p>
+            <div class="question-container">
+                <p>Height (in m):</p>
+                <input type="number" id="height" name="height" min="0" max="3" style="width: 200px;" placeholder="Enter your height">
+            </div>
+            <div class="question-container">
+                <p>Weight (in kg):</p>
+                <input type="number" id="weight" name="weight" min="0" max="200" style="width: 200px;" placeholder="Enter your weight">
+            </div>
+        </div>
+
+        <div class="question" id="question4">
+            <p>Q4. Do you rely on a caretaker for basic movements? For example, moving about and walking, using the toilet, standing up, etc.</p>
+            <button class="b" id="caretakerYes" name="caretaker" onclick="selectButton('caretakerYes', 'caretakerNo')">Yes</button>
+            <button class="b" id="caretakerNo" name="caretaker" onclick="selectButton('caretakerNo', 'caretakerYes')">No</button>
+            <script>
+                function selectButton(clickedId, otherId) {
+                    // Get both buttons
+                    const clickedButton = document.getElementById(clickedId);
+                    const otherButton = document.getElementById(otherId);
+
+                    // Add the clicked class to the clicked button, remove it from the other
+                    clickedButton.classList.add('clicked');
+                    otherButton.classList.remove('clicked');
+                }
+            </script>
+        </div>
+
+        <div class="question" id="question5">
+            <p>Q5. Do you have any of the following medical conditions? (Select more than 1 if necessary)</p>
+            <label><input type="checkbox" name="q5" value="Mild Joint" class="mild-option">Mild Joint Pain</label><br>
+            <label><input type="checkbox" name="q5" value="Severe Joint" class="severe-option">Severe Joint Pain</label><br>
+            <label><input type="checkbox" name="q5" value="Mild Back" class="mild-option">Mild Back Pain</label><br>
+            <label><input type="checkbox" name="q5" value="Severe Back" class="severe-option">Severe Back Pain</label><br>
+            <label><input type="checkbox" name="q5" value="Tendonitis" class="severe-option">Severe Tendonitis</label><br>
+            <label><input type="checkbox" name="q5" value="Cholesterol" class="mild-option">High Cholesterol</label><br>
+            <label><input type="checkbox" name="q5" value="Blood Pressure" class="mild-option">High Blood Pressure</label><br>
+            <label><input type="checkbox" name="q5" value="Heart Disease" class="severe-option">Heart Disease</label><br>
+            <label><input type="checkbox" name="q5" value="Diabetes" class="mild-option">Diabetes</label><br>
+            <label><input type="checkbox" name="q5" value="DDD" class="severe-option">Degenerative Disc Disease</label><br>
+            <label><input type="checkbox" name="q5" value="Fractures" class="severe-option">More than 1 Prior Fracture after 40</label><br>
+            <label><input type="checkbox" name="q5" value="Other Mild" class="mild-option">Other Mild Medical Conditions (not listed here)</label><br>
+            <label><input type="checkbox" name="q5" value="Other Severe" class="severe-option">Other Severe Medical Conditions (not listed here)</label><br>
+            <label><input type="checkbox" name="q5" value="No Conditions" onclick="toggleOtherOptions2(this)">No Medical Conditions</label><br>
+            <script>
+                function toggleOtherOptions2(noConditionsCheckbox) {
+                    const otherOptions = document.querySelectorAll('.mild-option, .severe-option');
+
+                    if (noConditionsCheckbox.checked) {
+                        otherOptions.forEach(option => {
+                            option.checked = false;
+                            option.disabled = true;
+                        });
+                    } else {
+                        otherOptions.forEach(option => option.disabled = false);
+                    }
+                }
+            </script>
+        </div>
+
+        <div class="question" id="question6">
+            <p>Q6. Do you take any of the following medications? (Select more than 1 if necessary)</p>
+            <label><input type="checkbox" name="q6" value="Cardio" class="other-option3">Cardiovascular-Related Medications, e.g. Beta Blockers</label><br>
+            <label><input type="checkbox" name="q6" value="Diuretics" class="other-option3">Diuretics</label><br>
+            <label><input type="checkbox" name="q6" value="Anti-coagulants" class="other-option3">Anti-coagulants</label><br>
+            <label><input type="checkbox" name="q6" value="Pain Medication" class="other-option3">Pain Medications</label><br>
+            <label><input type="checkbox" name="q6" value="CNS Medication" class="other-option3">CNS Medications</label><br>
+            <label><input type="checkbox" name="q6" value="Polypharmacy" class="other-option3">Medication with Polypharmacy Risks</label><br>
+            <label><input type="checkbox" name="q6" value="Other Bad Meds" class="other-option3">Other medication which may affect physical ability</label><br>
+            <label><input type="checkbox" name="q6" value="Other Okay Meds" class="other-option4">Other medication that do not affect physical ability</label><br>
+            <label><input type="checkbox" name="q6" value="No Meds" onclick="toggleOtherOptions3(this)">No Medication</label><br>
+            <script>
+                function toggleOtherOptions3(noMSDsCheckbox) {
+                    // Get all checkboxes with the class 'other-option'
+                    const otherOptions = document.querySelectorAll('.other-option3, .other-option4');
+            
+                    if (noMSDsCheckbox.checked) {
+                        // Disable other options if 'No MSDs' is checked
+                        otherOptions.forEach(option => {
+                            option.checked = false; // Uncheck any already selected options
+                            option.disabled = true;
+                        });
+                    } else {
+                        // Enable other options if 'No MSDs' is unchecked
+                        otherOptions.forEach(option => option.disabled = false);
+                    }
+                }
+            </script>
+        </div>
+
+        <div class="question" id="question7">
+            <p>Q7. Please rank your activity levels. (1 = Very Active, 2 = Active, 3 = Moderate, 4 = Little Activity, 5 = Sedentary)</p>
+            <div>
+                <input type="range" id="activityLevel" name="activityLevel" min="1" max="5" value="3" style="width: 500px;" oninput="this.nextElementSibling.value = this.value">
+                <output>3</output> <!-- Display the current slider value -->
+            </div>
+        </div>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <div class="question">
+        <button class="b" onclick="submitQuiz()">Submit</button>
+        <div id="riskassessment"></div>
+        <div id="diagnostic-container" style="display: flex; align-items: center;">
+            <div id="diagnostic"></div>
+            <!-- Image container for risk level -->
+            <img id="riskImage" style="width: auto; height: 200px; margin-right: 15px;">
+        </div>
+        <div id="summary"></div>
+        <div id="finish"></div>
+    </div>
+
+    <script>
+        let risk;
+
+        function calculateAge() {
+            const ageInput = document.getElementById('age');
+            const age = parseInt(ageInput.value);
+
+            // Check if age is valid
+            if (!isNaN(age)) {
+                if (age > 80) {
+                    risk += 100;
+                } else if (age > 70) {
+                    risk += 2;
+                } else if (age > 60) {
+                    risk += 1;
+                } else if (age <= 5) {
+                    risk += 100;
+                }
+            }
+        }
+        
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+
+            if (height > 0 && weight > 0) {
+                const bmi = weight / (height * height);
+                if (bmi >= 30) {
+                    risk += 100;
+                } else if (bmi <= 16) {
+                    risk += 100;
+                }
+            }
+            return null; // Return null if height or weight is invalid
+        }
+
+        function calculateCaretaker() {
+            const caretakerYesSelected = document.getElementById('caretakerYes').classList.contains('clicked');
+            
+            // Adjust risk based on whether "Yes" is selected
+            if (caretakerYesSelected) {
+                risk += 100;
+            }
+        }
+
+        function calculateCondition() {
+            const mildOptions = document.querySelectorAll('.mild-option:checked');
+            const severeOptions = document.querySelectorAll('.severe-option:checked');
+
+            // Increment risk based on the selected mild conditions
+            mildOptions.forEach(() => risk += 2);
+
+            // Increment risk based on the selected severe conditions
+            severeOptions.forEach(() => risk += 100);
+        }
+
+        function calculateMed() {
+            const mildMeds = document.querySelectorAll('.other-option4:checked');
+            const severeMeds = document.querySelectorAll('.other-option3:checked');
+
+            // Increment risk based on the selected mild conditions
+            mildMeds.forEach(() => risk += 1);
+
+            // Increment risk based on the selected severe conditions
+            severeMeds.forEach(() => risk += 100);
+        }
+
+        function calculateActivity() {
+            const activityLevel = document.getElementById("activityLevel").value; // Get slider value
+            risk += parseInt(activityLevel); // Add slider value to risk
+        }
+
+        function risky() {
+            const riskassessmentDIV = document.getElementById('riskassessment');
+            riskassessmentDIV.innerHTML = "<p><strong>Risk Assessment:</strong></p>";
+            const diagnosticDIV = document.getElementById('diagnostic');
+            diagnosticDIV.innerHTML = "";
+            const riskImage = document.getElementById('riskImage');
+            if (risk >= 100) {
+                diagnosticDIV.innerHTML = "<p>Because of your biometric data and/or medical conditions, Echidna Physiotherapy may not be suitable for you. We recommend you to consult a physiotherapist before attempting these exercises to ensure your safety!</p>";
+                riskImage.src = "archie/sadarchie.png";
+            } else if (risk > 12) {
+                diagnosticDIV.innerHTML = "<p>We recommend you to carry out these exercises with caution, ideally with the supervision of a family member or caretaker. We encourage you to attempt these exercises for a strict maximum of 15 minutes to avoid accidents or overexertion.</p>";
+                riskImage.src = "archie/situparchie.png";
+                generateSummary();
+            } else if (risk > 6) {
+                diagnosticDIV.innerHTML = "<p>It is relatively safe for you to attempt the exercise sets! However, do remember to exercise caution. We encourage you to attempt these exercises for a maximum of 20 minutes to prevent overexertion!</p>";
+                riskImage.src = "archie/standarchie.png";
+                generateSummary();
+            } else if (risk > 0) {
+                diagnosticDIV.innerHTML = "<p>It is safe for you to attempt the exercise sets! We encourage you to attempt these exercises for a duration of 15 minutes to 30 minutes depending on the level you are most comfortable with!</p>";
+                riskImage.src = "archie/dancearchie.png";
+                generateSummary();
+            } else {
+                diagnosticDIV.innerHTML = "<p>You have not provided sufficient data for us to conduct a risk assessment. Please resubmit the diagnostic quiz and try again!</p>";
+                riskImage.src = "archie/bigarchie.png";
+                generateSummary();
+            }
+            const finishDIV = document.getElementById('finish');
+            finishDIV.innerHTML = "Thank you for completing the diagnostic quiz! For your safety, do adhere to the instructions given above. You may retake the quiz anytime by going to the homepage, clicking on About Echidna, and then clicking on Diagnostic Quiz.";
+        }
+
+        function generateSummary() {
+            // Get the summary div
+            const summaryDiv = document.getElementById('summary');
+            summaryDiv.innerHTML = ""; // Clear previous summary
+
+            // Get all selected checkboxes
+            const selectedOptions = Array.from(document.querySelectorAll('input[name="q1"]:checked'));
+
+            if (selectedOptions.length === 0) {
+                summaryDiv.innerHTML = "";
+                return;
+            }
+
+            // Create a list of selected options with relevant links or messages
+            const summaryList = document.createElement('ul');
+            selectedOptions.forEach(option => {
+                const listItem = document.createElement('li');
+
+                switch (option.value) {
+                    case "No MSDs":
+                        // Provide two links for "No MSDs"
+                        listItem.innerHTML = `<a href="upperbody.html" target="_blank">Upper Body Exercises</a> and <a href="lowerbody.html" target="_blank">Lower Body Exercises</a>`;
+                        break;
+                    case "Kyphosis":
+                        listItem.innerHTML = `<a href="kyphosis.html" target="_blank">Kyphosis</a>`;
+                        break;
+                    case "Osteoarthritis":
+                        listItem.innerHTML = `<a href="osteoarthritis.html" target="_blank">Osteoarthritis</a>`;
+                        break;
+                    case "Osteoporosis":
+                        listItem.innerHTML = `<a href="osteoporosis.html" target="_blank">Osteoporosis</a>`;
+                        break;
+                    case "Sarcopenia":
+                        listItem.innerHTML = `<a href="sarcopenia.html" target="_blank">Sarcopenia</a>`;
+                        break;
+                    case "Other MSDs":
+                        // Display a custom message for "Other MSDs" without a link
+                        listItem.innerHTML = `Sorry, we do not have an exercise set for your other MSDs yet.`;
+                        break;
+                }
+
+                summaryList.appendChild(listItem);
+            });
+
+            // Append the summary list to the summary div
+            summaryDiv.innerHTML = "<p><strong>Try these Exercises:</strong></p>";
+            summaryDiv.appendChild(summaryList);
+        }
+
+        function submitQuiz() {
+            risk = 0;
+            calculateAge(); // Calculate risk based on age
+            calculateBMI();  // Calculate risk based on BMI
+            calculateCaretaker();
+            calculateCondition();
+            calculateMed();
+            calculateActivity();
+            risky();
+        }
+    </script>
+
+    <section style="text-align: center;">
+        <style>
+        .c {
+            display: inline-block;
+            height: 50px;
+            width: 150px;
+            background: #E0A75E;
+            transition: all 0.5s;
+            line-height: 50px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            border-radius: 20px;
+            margin: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .c:hover {
+            background: #bc5353;
+        }
+        </style>
+        <a href="about.html" class="c"> Back </a>
+        <a href="index.html" class="c"> Home </a>
+    </section>
+
+</body>
+
+</html>
